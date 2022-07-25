@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="og:title" content = "Healthify Disease Predictor">
+    <meta name="author" content = "Anshi Gupta, Nitesh yadav">
+    <meta name="og:image" content = "static/logo1.png">
+    <meta name="keywords" content = "Flask, Machine Learning, Deep Learning, AI, ML, DL">
+    <meta name="description" content="A Machine Learning and Deep Learning based webapp for multiple Disease Prediction.">
+    <title>Healthify</title>
+    <link rel="icon" href="{{ url_for('static', filename = 'logo1.png')}}" type = "image/icon type">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@500&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <style>
+        html, body{height:100%; margin:0;}
+        header{ height:50px;}
+        footer{ height:75px; background:black; }
+
+        body{
+            display:flex;
+            flex-direction: column;
+            background-image: url('static/cancer.webp');
+        }
+
+        footer{
+            padding: 10px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" style="background-color: black !important;">
+        <a href="{{ url_for('home') }}" style="font-size: 220%; margin-left: 10%; font-family: 'Edu NSW ACT Foundation', cursive; color: #FFFFFF;">Healthify</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class = "collapse navbar-collapse" id = "navbarNav">
+            <ul class = "navbar-nav ml-auto">
+                <li class = "nav-item active">
+                     <a href = "{{ url_for('home') }}" class = "nav-link" style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Home</a>
+                </li>
+                <li class="nav-item active">
+                     <a class="nav-link" href="{{ url_for('diabetes') }} " style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Diabetes</a>
+                </li>
+                <li class="nav-item active">
+                     <a class="nav-link" href="{{ url_for('breast_cancer') }} " style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Breast Cancer</a>
+                </li>
+                <li class="nav-item active">
+                     <a class="nav-link" href="{{ url_for('heart') }} " style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Heart</a>
+                </li>
+                <li class="nav-item active">
+                     <a class="nav-link" href="{{ url_for('kidney') }} " style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Kidney</a>
+                </li>
+                <li class="nav-item active">
+                     <a class="nav-link" href="{{ url_for('liver') }} " style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Liver</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div style="width:65%; height: 69%; margin-top: 5%; margin-left: 15%; background-color: #FFB6C1; border: 2px solid #C71585; border-radius: 30px;" class = "row">
+        <div style = "width: 85%; height: 93%; margin-top: 2%; margin-left: 7.5%;">
+            <center><h3 style = "font-size: 300%; font-family: 'Edu NSW ACT Foundation', cursive; margin-bottom: 2%; color: #C71585;">Breast Cancer Predictor</h3></center>
+                <form class="form-horizontal" action="{{ url_for('predict_cancer') }}" method="POST">
+                    <div class = "row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="radius_mean" placeholder="radius_mean">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="texture_mean" placeholder="texture_mean">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="perimeter_mean" placeholder="perimeter_mean">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="area_mean" placeholder="area_mean">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="smoothness_mean" placeholder="smoothness_mean">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="compactness_mean" placeholder="compactness_mean">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="concavity_mean" placeholder="concavity_mean">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="concave_points_mean" placeholder="concave_points_mean">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="symmetry_mean" placeholder="symmetry_mean">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="radius_se" placeholder="radius_se">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="perimeter_se" placeholder="perimeter_se">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="area_se" placeholder="area_se">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="compactness_se" placeholder="compactness_se">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="concavity_se" placeholder="concavity_se">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="concave_points_se" placeholder="concave_points_se">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="fractal_dimension_se" placeholder="fractal_dimension_se">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="radius_worst" placeholder="radius_worst">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="texture_worst" placeholder="texture_worst">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="perimeter_worst" placeholder="perimeter_worst">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="area_worst" placeholder="area_worst">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="smoothness_worst" placeholder="smoothness_worst">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="compactness_worst" placeholder="compactness_worst">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="concavity_worst" placeholder="concavity_worst">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="concave_points_worst" placeholder="concave_points_worst">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-bottom: 10px;">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="symmetry_worst" placeholder="symmetry_worst">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="fractal_dimension_worst" placeholder="fractal_dimension_worst">
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="submit" class="btn btn-outline-dark btn-block" value="Predict">
+
+                </form>
+
+        </div>
+    </div>
+
+    <div class="row" style="width: 45%; height: 4%; margin-top: 2.2%; margin-bottom: 2.5%; margin-left: 35%;">
+        <div style=" font-family: 'Edu NSW ACT Foundation', cursive; font-size: 210%; color: #990073;">
+            {{ prediction_text }}
+        </div>
+    </div>
+
+<footer>
+    <center>
+        <ul style="list-style-type:none;">
+            <div style="margin-top:7px;">
+                <li style="display: inline;"><a href="https://www.linkedin.com/in/nitesh0331/" style="color: white; margin-right: 5px;" target="blank"><span class="fa fa-linkedin">  LinkedIn</span></a></li>
+                <li style="display: inline;"><a href="https://www.linkedin.com/in/anshigupta01/" style="color: white;" target="blank"><span class="fa fa-linkedin">  LinkedIn</span></a></li>
+          &nbsp;
+                <li style="display: inline;"><a href="https://github.com/Niteshyadav0331" style="color: white; margin-right: 5px;" target="blank"><span class="fa fa-github">  GitHub</span></a></li>
+                <li style="display: inline;"><a href="https://github.com/Anshigupta" style="color: white;" target="blank"><span class="fa fa-github">  GitHub</span></a></li>
+            </div>
+            <div style="margin-top: 5px;">
+                <li><p style="color: white;">Made with <span style="color: red;">&hearts;</span> by Nitesh Yadav and Anshi Gupta</p></li>
+            </div>
+        </ul>
+    </center>
+</footer>
+
+</body>
+</html>
