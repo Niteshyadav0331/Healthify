@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="og:title" content = "Healthify Disease Predictor">
+    <meta name="author" content = "Anshi Gupta, Nitesh yadav">
+    <meta name="keywords" content = "Flask, Machine Learning, Deep Learning, AI, ML, DL">
+    <meta name="description" content="A Machine Learning and Deep Learning based webapp for multiple Disease Prediction.">
+    <title>Healthify</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@500&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <style>
+        html, body{height:100%; margin:0;}
+        footer{ height: 8%; background:black; }
+
+        body{
+            display:flex;
+            flex-direction: column;
+            background-image: url('static/kidney.jpeg');
+        }
+
+        footer{
+            padding: 10px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" style="background-color: black !important;">
+        <a href="{{ url_for('home') }}" style="font-size: 220%; margin-left: 10%; font-family: 'Edu NSW ACT Foundation', cursive; color: #FFFFFF;">Healthify</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class = "collapse navbar-collapse" id = "navbarNav">
+            <ul class = "navbar-nav ml-auto">
+                <li class = "nav-item active">
+                     <a href = "{{ url_for('home') }}" class = "nav-link" style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Home</a>
+                </li>
+                <li class="nav-item active">
+                     <a class="nav-link" href="{{ url_for('diabetes') }} " style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Diabetes</a>
+                </li>
+                <li class="nav-item active">
+                     <a class="nav-link" href="{{ url_for('breast_cancer') }} " style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Breast Cancer</a>
+                </li>
+                <li class="nav-item active">
+                     <a class="nav-link" href="{{ url_for('heart') }} " style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Heart</a>
+                </li>
+                <li class="nav-item active">
+                     <a class="nav-link" href="{{ url_for('kidney') }} " style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Kidney</a>
+                </li>
+                <li class="nav-item active">
+                     <a class="nav-link" href="{{ url_for('liver') }} " style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Liver</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div style="width: 48%; margin-top: 5%; margin-left: 26%; background-color: #ffa366; border: 2px solid #006080; border-radius: 30px;" class = "row">
+        <div style = "width: 80%; height: 90%; margin-top: 2%; margin-left: 10%;">
+            <center><h3 style = "font-size: 50px; font-family: 'Edu NSW ACT Foundation', cursive; margin-bottom: 2%; color: #007a99;">Kidney Disease Predictor</h3></center>
+                <form class="form-horizontal" action="{{ url_for('predict_kidney') }}" method="POST">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="age" placeholder="age">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="bp" placeholder="bp">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="al" placeholder="al"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="su" placeholder="su">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="rbc" placeholder="rbc">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="pc" placeholder="pc">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="pcc" placeholder="pcc">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="ba" placeholder="ba">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="bgr" placeholder="bgr">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="bu" placeholder="bu">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="sc" placeholder="sc">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="pot" placeholder="pot">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="wc" placeholder="wc">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="htn" placeholder="htn">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="dm" placeholder="dm">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="cad" placeholder="cad">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style = "margin-bottom: 20px;">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="pe" placeholder="pe">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input style="border: 1px solid black;" class="form-control" type="text" name="ane" placeholder="ane">
+                            </div>
+                        </div>
+                    </div>
+                <input type="submit" class="btn btn-info btn-block" value="Predict" style="margin-bottom: 3%">
+                </form>
+        </div>
+    </div>
+
+    <div class="row" style="width: 45%; height: 50px; margin-top: 1.5%; margin-bottom: 2.1%; margin-left: 30%;">
+        <div style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 220%; color: #004d80;">
+            {{ prediction_text }}
+        </div>
+    </div>
+
+<footer>
+    <center>
+        <ul style="list-style-type:none;">
+            <div style="margin-top:7px;">
+                <li style="display: inline;"><a href="https://www.linkedin.com/in/nitesh0331/" style="color: white; margin-right: 5px;" target="blank"><span class="fa fa-linkedin">  LinkedIn</span></a></li>
+                <li style="display: inline;"><a href="https://www.linkedin.com/in/anshigupta01/" style="color: white;" target="blank"><span class="fa fa-linkedin">  LinkedIn</span></a></li>
+          &nbsp;
+                <li style="display: inline;"><a href="https://github.com/Niteshyadav0331" style="color: white; margin-right: 5px;" target="blank"><span class="fa fa-github">  GitHub</span></a></li>
+                <li style="display: inline;"><a href="https://github.com/Anshigupta" style="color: white;" target="blank"><span class="fa fa-github">  GitHub</span></a></li>
+            </div>
+            <div style="margin-top: 5px;">
+                <li><p style="color: white;">Made with <span style="color: red;">&hearts;</span> by Nitesh Yadav and Anshi Gupta</p></li>
+            </div>
+        </ul>
+    </center>
+</footer>
+
+</body>
+</html>

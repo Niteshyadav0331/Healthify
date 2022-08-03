@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="og:title" content = "Healthify Disease Predictor">
+    <meta name="author" content = "Anshi Gupta, Nitesh yadav">
+    <meta name="keywords" content = "Flask, Machine Learning, Deep Learning, AI, ML, DL">
+    <meta name="description" content="A Machine Learning and Deep Learning based webapp for multiple Disease Prediction.">
+    <title>Healthify</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@500&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <style>
+        html, body{height:100%; margin:0;}
+        footer{ height: 8%; background:black; }
+
+        body{
+            display:flex;
+            flex-direction: column;
+            background-image: url('static/diabetes.webp');
+        }
+
+        footer{
+            padding: 10px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark" style="background-color: black !important;">
+        <a href="{{ url_for('home') }}" style="font-size: 220%; margin-left: 10%; font-family: 'Edu NSW ACT Foundation', cursive; color: #FFFFFF;">Healthify</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class = "collapse navbar-collapse" id = "navbarNav">
+            <ul class = "navbar-nav ml-auto">
+                <li class = "nav-item active">
+                     <a href = "{{ url_for('home') }}" class = "nav-link" style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Home</a>
+                </li>
+                <li class="nav-item active">
+                     <a class="nav-link" href="{{ url_for('diabetes') }} " style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Diabetes</a>
+                </li>
+                <li class="nav-item active">
+                     <a class="nav-link" href="{{ url_for('breast_cancer') }} " style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Breast Cancer</a>
+                </li>
+                <li class="nav-item active">
+                     <a class="nav-link" href="{{ url_for('heart') }} " style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Heart</a>
+                </li>
+                <li class="nav-item active">
+                     <a class="nav-link" href="{{ url_for('kidney') }} " style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Kidney</a>
+                </li>
+                <li class="nav-item active">
+                     <a class="nav-link" href="{{ url_for('liver') }} " style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">Liver</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div style="width: 75%; margin-top:6%; margin-bottom: 5%; margin-left: 12%;">
+        <div class="card card-body" style="border: 1px solid black; box-shadow: 0 0 10px black;">
+            <div style="width: 96%; margin-left: 2%;">
+                <div style="width: 65%;margin-left: 15%;">
+                    <center><h2 style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 250%;"> Machine Learning based WebApp.</h2>
+                    <p style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 160%;">These Machine Learning models are trained on large datasets and thousands of images.</p>
+                    <br>
+                        <h2 style="font-family: 'Edu NSW ACT Foundation', cursive; font-size: 220%;">Model Accuracies:</h2></center>
+                        <div style="margin-left: 35%; margin-top: 2%; font-family: 'Edu NSW ACT Foundation', cursive;">
+                            <ul>
+                                <li style="font-size: 130%;">Diabetes Model: <strong>98.25%</strong></li>
+                                <li style="font-size: 130%;">Breast Cancer Model: <strong>98.85%</strong></li>
+                                <li style="font-size: 130%;">Heart Disease Model: <strong>85.25%</strong></li>
+                                <li style="font-size: 130%;">Kidney Disease Model: <strong>99%</strong></li>
+                                <li style="font-size: 130%;">Liver Disease Model: <strong>78%</strong></li>
+                            </ul>
+                        </div>
+                    <br>
+                    <center><h3 style="font-family: 'Edu NSW ACT Foundation', cursive;">Information about the Diseases which this webApp can predict.</h3></center>
+                </div>
+                <div style="width: 96%; margin-top: 2%; font-family: 'Edu NSW ACT Foundation', cursive; font-size: 130%;">
+                    <div class="row">
+                        <div class="col-md-5 card card-body" style="box-shadow: 0 0 5px black; margin-left: 6%; margin-top: 2%; margin-bottom: 2%;">
+                            <center><h4 style="font-size: 160%;">Diabetes</h4></center>
+                            <p style="font-size: 110%;">Diabetes happens when your body isn't able to take up sugar (glucose) into its cells and use it for energy. This results in a build up of extra sugar in your bloodstream.
+
+Poorly controlled diabetes can lead to serious consequences, causing damage to a wide range of your body's organs and tissues – including your heart, kidneys, eyes and nerves.</p>
+                            <h5 style="font-size: 110%;">Symptoms</h5>
+                            <ul>
+                                <li style="font-size: 110%;">Increased thirst.</li>
+                                <li style="font-size: 110%;">Weak, tired feeling.</li>
+                                <li style="font-size: 110%;">Slow-healing sores or cuts.</li>
+                                <li style="font-size: 110%;">Frequent urination.</li>
+                                <li style="font-size: 110%;">Blurred vision.</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-5 card card-body" style="box-shadow: 0 0 5px black; margin-left: 8%; margin-top: 2%; margin-bottom: 2%;">
+                            <center><h4 style="font-size: 160%;">Breast Cancer</h4></center>
+                            <p style="font-size: 110%;">Breast cancer occurs when some breast cells begin to grow abnormally. These cells divide more rapidly than healthy cells and continue to gather, forming a lump or mass. The cells may spread (metastasize) to the lymph nodes or other parts of the body.</p>
+                            <h5 style="font-size: 110%;">Symptoms</h5>
+                            <ul>
+                                <li style="font-size: 110%;">Swelling of all or part of a breast.</li>
+                                <li style="font-size: 110%;">Skin dimpling.</li>
+                                <li style="font-size: 110%;">Change in the size, shape or appearance of a breast.</li>
+                                <li style="font-size: 110%;">Breast or nipple pain.</li>
+                                <li style="font-size: 110%;">Redness or pitting of the skin over your breast, like the skin of an orange.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5 card card-body" style="box-shadow: 0 0 5px black; margin-left: 6%; margin-top: 2%; margin-bottom: 2%;">
+                            <center><h4 style="font-size: 160%;">Heart disease</h4></center>
+                            <p style="font-size: 110%;">Cardiovascular disease (heart disease) refers to a group of diseases that affect the heart and blood vessels of your body. These diseases can affect one or many parts of your heart and /or blood vessels. A person may be symptomatic (physically experience the disease) or be asymptomatic (not feel anything at all).</p>
+                            <h5 style="font-size: 110%;">Symptoms</h5>
+                            <ul>
+                                <li style="font-size: 110%;">Chest pain, chest tightness, chest pressure and chest discomfort (angina).</li>
+                                <li style="font-size: 110%;">Shortness of breath.</li>
+                                <li style="font-size: 110%;">Pain, numbness, weakness or coldness in your legs or arms.</li>
+                                <li style="font-size: 110%;">Pain in the neck, jaw, throat, upper abdomen or back.</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-5 card card-body" style="box-shadow: 0 0 5px black; margin-left: 8%; margin-top: 2%; margin-bottom: 2%;">
+                            <center><h4 style="font-size: 160%;">Chronic kidney disease</h4></center>
+                            <p style="font-size: 110%;">Chronic kidney disease, also called chronic kidney failure, involves a gradual loss of kidney function. Your kidneys filter wastes and excess fluids from your blood, which are then removed in your urine. Advanced chronic kidney disease can cause dangerous levels of fluid, electrolytes and wastes to build up in your body.</p>
+                            <h5 style="font-size: 110%;">Symptoms</h5>
+                            <ul>
+                                <li style="font-size: 110%;">weight loss and poor appetite.</li>
+                                <li style="font-size: 110%;">Vomiting.</li>
+                                <li style="font-size: 110%;">swollen ankles, feet or hands.</li>
+                                <li style="font-size: 110%;">Fatigue and weakness.</li>
+                                <li style="font-size: 110%;">blood in your pee (urine).</li>
+                                <li style="font-size: 110%;">difficulty sleeping (insomnia).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-11 card card-body" style="box-shadow: 0 0 5px black; margin-left: 6%; margin-top: 2%; margin-bottom: 2%;">
+                            <center><h4 style="font-size: 160%;">Liver disease</h4></center>
+                            <p style="font-size: 110%;">There are many kinds of liver diseases and conditions. Some, like hepatitis, are caused by viruses. Others can be the result of drugs or drinking too much alcohol.</p>
+                            <p style="font-size: 110%;">Symptoms of liver disease can vary, but they often include swelling of the abdomen and legs, bruising easily, changes in the color of your stool and urine, and jaundice, or yellowing of the skin and eyes. Sometimes there are no symptoms. Tests such as imaging tests and liver function tests can check for liver damage and help to diagnose liver diseases.</p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<footer>
+    <center>
+        <ul style="list-style-type:none;">
+            <div style="margin-top:7px;">
+                <li style="display: inline;"><a href="https://www.linkedin.com/in/nitesh0331/" style="color: white; margin-right: 5px;" target="blank"><span class="fa fa-linkedin">  LinkedIn</span></a></li>
+                <li style="display: inline;"><a href="https://www.linkedin.com/in/anshigupta01/" style="color: white;" target="blank"><span class="fa fa-linkedin">  LinkedIn</span></a></li>
+          &nbsp;
+                <li style="display: inline;"><a href="https://github.com/Niteshyadav0331" style="color: white; margin-right: 5px;" target="blank"><span class="fa fa-github">  GitHub</span></a></li>
+                <li style="display: inline;"><a href="https://github.com/Anshigupta" style="color: white;" target="blank"><span class="fa fa-github">  GitHub</span></a></li>
+            </div>
+            <div style="margin-top: 5px;">
+                <li><p style="color: white;">Made with <span style="color: red;">&hearts;</span> by Nitesh Yadav and Anshi Gupta</p></li>
+            </div>
+        </ul>
+    </center>
+</footer>
+
+</body>
+</html>
